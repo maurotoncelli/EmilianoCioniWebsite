@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMILIO CIONI | Master Blacksmith</title>
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <style>
+        /* --- CONFIGURAZIONE --- */
+        :root {
+            --bg-deep: #050505;
+            --bg-panel: #0b0b0b;
+            --text-main: #E0E0E0;
+            --text-muted: #888888;
+            --gold: #C5A059;
+            --border: rgba(255,255,255,0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        
+        ::selection { background: var(--gold); color: var(--bg-deep); }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body::-webkit-scrollbar { display: none; }
+        
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        button { border: none; outline: none; background: none; color: inherit; font-family: inherit; }
+
+        /* CUSTOM CURSOR */
+        .cursor-dot, .cursor-outline {
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            border-radius: 50%; z-index: 99999; pointer-events: none;
+        }
+        .cursor-dot { 
+            width: 8px; height: 8px; 
+            background-color: var(--gold); 
+            box-shadow: 0 0 10px var(--gold);
+        }
+        .cursor-outline {
+            width: 40px; height: 40px; 
+            border: 1px solid var(--gold); 
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+            opacity: 0.5;
+            mix-blend-mode: difference;
+        }
+        body.hovering .cursor-outline {
+            width: 60px; height: 60px; 
+            background-color: rgba(197, 160, 89, 0.2); 
+            border-color: transparent; 
+        }
+        @media (hover: none) and (pointer: coarse) {
+            .cursor-dot, .cursor-outline { display: none; }
+            * { cursor: auto !important; }
+        }
+
+        /* TYPOGRAPHY */
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-mono { font-family: 'Space Mono', monospace; letter-spacing: -0.02em; }
+        
+        .text-gold { color: var(--gold); }
+        .text-small { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; display: block; margin-bottom: 1rem; color: var(--gold); }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 400; line-height: 1.1; }
+        p { font-weight: 300; line-height: 1.7; color: #bbb; margin-bottom: 2rem; font-size: 1rem; }
+
+        /* TEXTURE */
+        .grain {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9000; opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        .vignette {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 8999;
+            background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.95) 100%);
+        }
+
+        /* UI ELEMENTS */
+        .btn-link {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em;
+            border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px;
+            transition: all 0.3s;
+        }
+        .btn-link:hover { color: var(--gold); border-color: var(--gold); }
+
+        .btn-solid {
+            padding: 1rem 3rem; border: 1px solid var(--text-main);
+            color: var(--text-main); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem;
+            transition: all 0.4s ease;
+        }
+        .btn-solid:hover { background: var(--text-main); color: var(--bg-deep); }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 2rem 5vw; display: flex; justify-content: space-between; align-items: center;
+            z-index: 9100; mix-blend-mode: difference; transition: transform 0.4s ease;
+        }
+        nav.nav-hidden { transform: translateY(-100%); }
+        .logo { font-size: 1.5rem; letter-spacing: 0.1em; z-index: 1001; }
+        .nav-menu { display: flex; gap: 3rem; }
+        .nav-item { 
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; 
+            opacity: 0.7; position: relative; transition: color 0.3s, opacity 0.3s;
+        }
+        /* ACTIVE STATE STYLE */
+        .nav-item.active { opacity: 1; color: var(--gold); }
+        .nav-item:hover { opacity: 1; color: var(--gold); }
+
+        /* PRELOADER */
+        .loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: #000; z-index: 99999;
+            display: flex; justify-content: center; align-items: center; flex-direction: column;
+        }
+        .loader svg { width: 600px; max-width: 90vw; height: auto; overflow: visible; margin-bottom: 0; }
+        .cls-1 { opacity: 0; transform-origin: center; }
+        .loader-text { display: flex; gap: 5px; overflow: hidden; margin-top: 20px; }
+        .loader-char {
+            font-family: 'Manrope', sans-serif; font-size: 0.8rem; letter-spacing: 0.2em; 
+            color: #666; text-transform: uppercase; opacity: 0; transform: translateY(10px);
+        }
+
+        /* PAGE SYSTEM */
+        .app-wrapper { position: relative; width: 100%; }
+        .page-section { display: none; opacity: 0; min-height: 100vh; transition: opacity 0.8s ease; padding-top: 100px;}
+        .page-section.active { display: block; opacity: 1; }
+        #home-page { padding-top: 0; }
+
+        /* HERO */
+        .hero {
+            height: 100vh; width: 100%; position: relative;
+            display: flex; justify-content: center; align-items: center; flex-direction: column;
+        }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            filter: grayscale(100%) contrast(1.1) brightness(0.6); 
+        }
+        .hero-text-container { 
+            z-index: 2; text-align: center; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+        }
+        .hero-line-wrap { overflow: hidden; }
+        .hero-sub {
+            font-family: 'Manrope', sans-serif; font-weight: 300;
+            font-size: 0.9rem; letter-spacing: 0.4em; text-transform: uppercase; color: #ccc;
+            transform: translateY(100%); opacity: 0;
+        }
+        .hero-main {
+            font-family: 'Playfair Display', serif; font-weight: 400;
+            font-size: 4.5vw; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.1;
+            transform: translateY(100%); opacity: 0;
+        }
+        .hero-main.italic { font-style: italic; color: var(--text-main); }
+        .hero-cta-wrap { margin-top: 3rem; transform: translateY(20px); opacity: 0; }
+
+        /* SEZIONI */
+        .home-works { padding: 6rem 0; }
+        .hw-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8rem; padding: 0 10vw; min-height: 70vh; }
+        .hw-item:nth-child(even) { flex-direction: row-reverse; }
+        .hw-visual {
+            width: 48%; height: 65vh; background: #1a1a1a; position: relative;
+            mask-image: radial-gradient(circle, black 30%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle, black 30%, transparent 100%);
+            transition: transform 0.6s;
+        }
+        .hw-visual:hover { transform: scale(1.02); }
+        .hw-info { width: 42%; padding: 2rem; }
+        
+        .status-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem; color: #666; text-transform: uppercase;
+            border: 1px solid #333; padding: 5px 10px; display: inline-block; margin-bottom: 1.5rem;
+        }
+        .status-badge.active { color: var(--gold); border-color: var(--gold); }
+
+        .artist-preview {
+            padding: 6rem 10vw; background: #080808; border-top: 1px solid var(--border);
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+        }
+
+        .grid-header { padding: 4rem 10vw; text-align: center; }
+        .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4rem 2rem; padding: 0 10vw 8rem; }
+        .grid-item { cursor: pointer; } 
+        .grid-img { height: 50vh; background: #1a1a1a; margin-bottom: 1.5rem; transition: opacity 0.3s; }
+        .grid-item:hover .grid-img { opacity: 0.8; }
+
+        .artist-hero { padding: 4rem 10vw; display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 4rem; }
+        .artist-full-img { height: 80vh; background: #222; filter: grayscale(100%); }
+        .artist-bio { padding-top: 2rem; }
+        .video-interview-section { width: 100%; height: 70vh; background: #000; position: relative; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); display:flex; align-items:center; justify-content:center;}
+
+        .design-hero { padding: 4rem 10vw; text-align: center; margin-bottom: 4rem;}
+        
+        .quote-design {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem; color: var(--gold); font-style: italic;
+            display: block; margin-bottom: 2rem; line-height: 1.2;
+        }
+
+        .contact-wrap { min-height: 80vh; display: flex; align-items: center; justify-content: center; }
+        .form-box { width: 100%; max-width: 600px; }
+        .input-group { margin-bottom: 2.5rem; }
+        .input-field {
+            width: 100%; background: transparent; border: none; border-bottom: 1px solid #333;
+            padding: 1rem 0; font-family: 'Manrope'; color: #fff; font-size: 1.1rem;
+            outline: none; transition: 0.3s;
+        }
+        .input-field:focus { border-bottom-color: var(--gold); }
+
+        /* PRIVACY CHECKBOX */
+        .privacy-group {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 3rem;
+            font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 0.1em;
+        }
+        .privacy-group input { 
+            accent-color: var(--gold); 
+            width: 16px; height: 16px; cursor: pointer; 
+            background: transparent; border: 1px solid #333;
+        }
+
+        /* DETAIL OVERLAY */
+        #detail-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-deep); 
+            z-index: 9500; 
+            overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; 
+            transform: translateY(100%); transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+        }
+        #detail-overlay.open { transform: translateY(0); }
+        .do-header { height: 70vh; position: relative; display: flex; align-items: flex-end; padding: 4rem 10vw; background: #000; }
+        .do-close {
+            position: fixed; top: 30px; right: 5vw; z-index: 9600;
+            font-size: 0.8rem; letter-spacing: 0.2em; border-bottom: 1px solid white; pointer-events: auto;
+            color: white; background: transparent;
+        }
+        .do-content { padding: 6rem 10vw; }
+        .do-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; margin-bottom: 6rem; }
+
+        .video-box-improved {
+            width: 100%; aspect-ratio: 16/9; 
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; border: 1px solid #333; cursor: pointer;
+        }
+        .video-box-improved::before {
+            content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.4); transition: 0.3s;
+        }
+        .video-box-improved:hover::before { background: rgba(0,0,0,0.2); }
+        .play-btn {
+            width: 80px; height: 80px; border: 1px solid var(--gold); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 2; transition: 0.3s;
+        }
+        .play-btn::after { content: '▶'; color: var(--gold); font-size: 1.5rem; margin-left: 5px; }
+        .video-box-improved:hover .play-btn { transform: scale(1.1); background: rgba(197, 160, 89, 0.1); }
+
+        .masonry-gallery { width: 100%; column-count: 2; column-gap: 2rem; }
+        @media (max-width: 768px) { .masonry-gallery { column-count: 1; } }
+        
+        .masonry-img {
+            width: 100%; margin-bottom: 2rem; display: block; background: #111;
+            break-inside: avoid; opacity: 0; transform: translateY(20px);
+        }
+
+        /* SCROLL TOP BTN */
+        #scroll-top-btn {
+            display: flex; justify-content: center; align-items: center;
+            width: 100%; padding: 2rem 0; cursor: pointer;
+            text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--gold);
+            z-index: 9100; position: relative;
+        }
+        #scroll-top-btn span { border-bottom: 1px solid var(--gold); padding-bottom: 5px; }
+
+        /* FOOTER */
+        footer { 
+            position: relative; z-index: 9100;
+            padding: 4rem 10vw; border-top: 1px solid var(--border); 
+            display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: end;
+            font-size: 0.7rem; letter-spacing: 0.1em; color: #555; text-transform: uppercase;
+        }
+        .footer-col.center { text-align: center; color: #E0E0E0; }
+        .footer-col.right { text-align: right; }
+        .footer-col span { display: block; margin-bottom: 0.5rem; }
+
+        @media (max-width: 768px) {
+            h1, .hero-main { font-size: 2.5rem !important; }
+            h2, h3 { font-size: 2rem !important; }
+            .nav-menu { display: none; }
+            .home-works { padding: 4rem 0; }
+            .hw-item, .hw-item:nth-child(even) { flex-direction: column; margin-bottom: 6rem; padding: 0 5vw; }
+            .hw-visual { width: 100%; height: 50vh; margin-bottom: 2rem; }
+            .hw-info { width: 100%; padding: 0; }
+            .grid-container { grid-template-columns: 1fr; gap: 4rem; padding: 0 5vw 6rem; }
+            .artist-preview, .artist-hero { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 5vw; }
+            .do-intro-grid { grid-template-columns: 1fr; gap: 4rem; }
+            footer { display: flex; flex-direction: column; gap: 2rem; align-items: flex-start; }
+            .footer-col.center, .footer-col.right { text-align: left; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <div class="grain"></div>
+    <div class="vignette"></div>
+
+    <!-- PRELOADER -->
+    <div class="loader">
+        <svg id="Logo_normale" data-name="Logo normale" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 173.4 160">
+            <defs><style>.cls-1 {fill: #fff;}</style></defs>
+            <polygon class="cls-1" points="36.18 111.08 39.61 111.08 39.61 110.07 36.18 110.07 36.18 107.89 40.13 107.89 40.13 106.82 34.97 106.82 34.97 114.5 40.23 114.5 40.23 113.43 36.18 113.43 36.18 111.08"/>
+            <polygon class="cls-1" points="48.03 111.51 45.49 106.82 44.19 106.82 44.19 114.5 45.4 114.5 45.4 108.97 47.69 113.16 48.36 113.16 50.64 108.97 50.64 114.5 51.86 114.5 51.86 106.82 50.57 106.82 48.03 111.51"/>
+            <rect class="cls-1" x="56.3" y="106.82" width="1.21" height="7.67"/>
+            <polygon class="cls-1" points="63.15 106.82 61.94 106.82 61.94 114.5 67.27 114.5 67.27 113.43 63.15 113.43 63.15 106.82"/>
+            <rect class="cls-1" x="70.95" y="106.82" width="1.21" height="7.67"/>
+            <path class="cls-1" d="M82.46,108c-.32-.37-.71-.66-1.16-.89-.45-.23-.95-.34-1.5-.34s-1.03.11-1.48.32c-.45.21-.84.5-1.17.86-.33.36-.59.77-.77,1.24-.19.47-.28.96-.28,1.47s.09.97.26,1.44c.18.47.43.88.75,1.25.32.36.71.66,1.16.88.45.22.95.33,1.5.33s1.01-.11,1.46-.32c.45-.21.84-.5,1.17-.85.33-.36.59-.77.77-1.24.18-.47.28-.96.28-1.47,0-.48-.09-.96-.26-1.42-.18-.46-.43-.88-.75-1.25ZM82.06,111.67c-.11.33-.27.63-.48.9-.21.27-.46.48-.76.64-.3.16-.64.24-1.03.24s-.71-.08-1.02-.23c-.3-.15-.56-.36-.77-.62-.21-.26-.38-.56-.49-.9-.12-.34-.17-.69-.17-1.05s.06-.69.17-1.02c.11-.34.27-.63.48-.89.21-.26.46-.47.77-.63.3-.16.65-.24,1.04-.24.37,0,.7.08,1,.23.3.16.55.36.77.62.21.26.38.55.49.89.12.34.17.69.17,1.05,0,.35-.05.68-.16,1.02Z"/>
+            <path class="cls-1" d="M97.68,112.78c-.16.16-.32.29-.51.39-.18.1-.37.18-.57.23-.2.05-.39.07-.58.07-.36,0-.69-.08-.99-.23-.3-.15-.56-.36-.78-.62-.22-.26-.39-.56-.51-.9-.12-.34-.18-.7-.18-1.07,0-.33.05-.66.16-.99.1-.33.26-.63.46-.9.21-.27.46-.48.76-.64.3-.16.66-.24,1.06-.24.18,0,.37.02.56.06.19.04.38.11.56.2.18.09.35.22.5.38.15.16.28.35.39.58l.95-.64c-.25-.5-.63-.9-1.12-1.21-.5-.31-1.1-.46-1.79-.46-.58,0-1.11.11-1.57.34-.46.22-.85.52-1.17.88-.32.36-.56.77-.73,1.23-.17.46-.25.92-.25,1.38,0,.49.09.97.27,1.44.18.47.43.89.76,1.26.32.37.71.67,1.16.9.45.23.94.35,1.48.35.3,0,.61-.04.92-.12.31-.08.61-.19.89-.35.28-.15.53-.34.76-.56.22-.22.4-.47.52-.76l-1.01-.57c-.1.22-.23.41-.38.57Z"/>
+            <rect class="cls-1" x="102.89" y="106.82" width="1.21" height="7.67"/>
+            <path class="cls-1" d="M114.4,108c-.32-.37-.71-.66-1.16-.89-.45-.23-.95-.34-1.5-.34s-1.03.11-1.48.32c-.45.21-.84.5-1.17.86-.33.36-.59.77-.77,1.24-.19.47-.28.96-.28,1.47s.09.97.26,1.44c.18.47.43.88.75,1.25.32.36.71.66,1.16.88.45.22.95.33,1.5.33s1.01-.11,1.46-.32c.45-.21.84-.5,1.17-.85.33-.36.59-.77.77-1.24.18-.47.28-.96.28-1.47,0-.48-.09-.96-.26-1.42-.18-.46-.43-.88-.75-1.25ZM114.01,111.67c-.11.33-.27.63-.48.9-.21.27-.46.48-.76.64-.3.16-.64.24-1.03.24s-.71-.08-1.02-.23c-.3-.15-.56-.36-.77-.62-.21-.26-.38-.56-.49-.9-.12-.34-.17-.69-.17-1.05s.06-.69.17-1.02c.11-.34.27-.63.48-.89.21-.26.46-.47.77-.63.3-.16.65-.24,1.04-.24.37,0,.7.08,1,.23.3.16.55.36.77.62.21.26.38.55.49.89.12.34.17.69.17,1.05,0,.35-.05.68-.16,1.02Z"/>
+            <polygon class="cls-1" points="124.71 112.36 120.32 106.82 119.37 106.82 119.37 114.5 120.58 114.5 120.58 109.09 124.92 114.5 125.93 114.5 125.93 106.83 124.71 106.83 124.71 112.36"/>
+            <rect class="cls-1" x="130.36" y="106.82" width="1.21" height="7.67"/>
+            <path class="cls-1" d="M105.74,91.28h0c.41-.24.68-.68.68-1.18,0-.75-.61-1.36-1.36-1.36-.06,0-.13,0-.19.01-.63.08-1.49.25-2.65.54-4.55,1.12-9.57,1.78-13.37-.96-3.8-2.74-4.12-6.86-4.12-8.14s.32-5.35,4.12-8.09,8.82-2.08,13.37-.96c1.16.29,2.02.46,2.65.54.06,0,.12.01.19.01.75,0,1.36-.61,1.36-1.36,0-.5-.27-.95-.68-1.18h0c-2.41-1.29-8.55-2.58-11.56-2.56-2.3.01-6.69,1.22-9.82,4.43v-.28h-16.69v-12.46h15.56v-.73h-15.56v-11.37h16.54v-.73h-17.27v26.02h17c-1.85,2.08-3.16,4.93-3.16,8.74,0,10.27,9.57,13.63,13.4,13.65,3.02.02,9.15-1.27,11.56-2.56Z"/>
+        </svg>
+        <div class="loader-text">
+            <span class="loader-char">E</span><span class="loader-char">M</span><span class="loader-char">I</span><span class="loader-char">L</span><span class="loader-char">I</span><span class="loader-char">O</span>
+            <span class="loader-char" style="margin-left:10px;">C</span><span class="loader-char">I</span><span class="loader-char">O</span><span class="loader-char">N</span><span class="loader-char">I</span>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <nav id="navbar">
+        <div class="logo font-serif" onclick="router.go('home', this)">EMILIO CIONI</div>
+        <ul class="nav-menu">
+            <li class="nav-item active" onclick="router.go('home', this)">Home</li>
+            <li class="nav-item" onclick="router.go('collection', this)">Collezione</li>
+            <li class="nav-item" onclick="router.go('artist', this)">L'Artista</li>
+            <li class="nav-item" onclick="router.go('design', this)">Collaborazioni</li>
+            <li class="nav-item" onclick="router.go('contacts', this)">Contatti</li>
+        </ul>
+    </nav>
+
+    <!-- MAIN APP -->
+    <main class="app-wrapper">
+
+        <!-- 1. HOME -->
+        <section id="home-page" class="page-section active">
+            <div class="hero">
+                <div class="hero-bg">
+                    <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1504198458649-3128b932f49e?q=80&w=1500&auto=format&fit=crop" style="width:100%; height:100%; object-fit: cover;">
+                         <source src="https://videos.pexels.com/video-files/5725969/5725969-hd_1920_1080_25fps.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="hero-text-container">
+                    <div class="hero-line-wrap"><div class="hero-sub">NELLE SCUDERIE DI LAJATICO</div></div>
+                    <div class="hero-line-wrap" style="margin-top: 1rem;"><h1 class="hero-main">L'ANIMA DEL CAVALLO</h1></div>
+                    <div class="hero-line-wrap"><h1 class="hero-main italic">FORGIATA NEL FERRO</h1></div>
+                </div>
+                <div class="hero-cta-wrap" onclick="router.scrollToWorks()">
+                    <span style="font-size: 0.7rem; letter-spacing: 0.3em; border-bottom:1px solid white; padding-bottom:5px; cursor:pointer;">VEDI TUTTA LA COLLEZIONE</span>
+                </div>
+            </div>
+            <div class="home-works" id="home-works-anchor"></div>
+            <div class="artist-preview">
+                <div style="height: 60vh; background: #222; background-image: url('https://images.unsplash.com/photo-1589828952059-0743b593673c?q=80&w=1000&auto=format&fit=crop'); background-size:cover; filter: grayscale(100%);"></div>
+                <div>
+                    <span class="text-small">MAESTRO STALLIERE</span>
+                    <h2 class="font-serif" style="font-size: 3rem; margin-bottom: 2rem;">Emilio Cioni</h2>
+                    <p>Dalle scuderie di Lajatico alle collezioni private più esclusive. Una vita passata ad ascoltare il respiro dei cavalli per poi renderlo eterno nel metallo.</p>
+                    <button class="btn-solid" onclick="router.go('artist', document.querySelectorAll('.nav-item')[2])">Scopri la Storia</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. COLLECTION -->
+        <section id="collection-page" class="page-section">
+            <div class="grid-header">
+                <span class="text-small">COLLEZIONE ARTE</span>
+                <h1 class="font-serif" style="font-size: 4rem;">Collezione</h1>
+            </div>
+            <div class="grid-container" id="collection-grid"></div>
+        </section>
+
+        <!-- 3. DESIGN -->
+        <section id="design-page" class="page-section">
+            <div class="design-hero">
+                <span class="text-small">INTERIOR DESIGN</span>
+                <h1 class="font-serif" style="font-size: 4rem; margin-bottom: 1rem;">Ferro e Legno</h1>
+                <p style="max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8;">
+                    <span class="quote-design">"Non arredamento. Sculture abitabili."</span><br>
+                    Dall'incontro tra la visione contemporanea dello studio <strong>Segnobianco</strong> e la maestria ancestrale di Emilio Cioni nasce una capsule collection senza precedenti. Tre opere di design funzionale dove il legno massello, caldo e vivo, riposa su strutture in ferro forgiato a mano, recuperato dalle vecchie scuderie. Non sono semplici tavoli, ma dialoghi materici tra la forza della terra e l'eleganza del segno. Ogni pezzo è numerato, unico e irripetibile.
+                </p>
+            </div>
+            <div class="grid-container" id="design-grid"></div>
+        </section>
+
+        <!-- 4. ARTIST -->
+        <section id="artist-page" class="page-section">
+            <div class="artist-hero">
+                <div class="artist-full-img" style="background-image: url('https://images.unsplash.com/photo-1589828952059-0743b593673c?q=80&w=1500&auto=format&fit=crop'); background-size: cover;"></div>
+                <div class="artist-bio">
+                    <h1 class="font-serif" style="font-size: 3.5rem; margin-bottom: 2rem;">Il Fabbro delle Stelle</h1>
+                    <p>
+                        Emilio non lavora il ferro, lo ascolta. Nelle lunghe notti toscane, quando il silenzio della tenuta è rotto solo dal vento che scuote gli ulivi, lui accende la forgia. Non c'è disegno su carta, non c'è progetto CAD. C'è solo la memoria tattile di vent'anni passati a ferrare i cavalli più nobili del mondo.
+                        <br><br>
+                        Per oltre vent'anni, Emilio ha vissuto all'ombra dei riflettori, curando i cavalli che hanno accompagnato la vita di Andrea Bocelli. Ma mentre il mondo ascoltava la voce del Maestro, Emilio ascoltava il suono degli zoccoli e del martello.
+                        <br><br>
+                        "Tutto è iniziato con un ferro rotto," racconta. "Invece di buttarlo, l'ho scaldato. Ho visto una curva che mi ricordava il collo di un puledro appena nato."
+                    </p>
+                    <blockquote style="font-family:'Playfair Display'; font-style:italic; font-size:1.5rem; border-left:2px solid var(--gold); padding-left:2rem; margin:3rem 0; color:#ddd;">"Io non creo nulla. Tolgo solo la ruggine e lascio che l'anima del cavallo esca fuori."</blockquote>
+                    <p>
+                        Ogni colpo di martello è una nota, ogni scintilla un ricordo. La sua arte è brutale e raffinata insieme: prende ciò che è stato scartato – il ferro consumato dalla corsa, corroso dalla terra e dal sudore – e gli dona una seconda vita, immobile ma vibrante di energia cinetica.
+                        Non è solo tecnica metallurgica; è un atto di rispetto verso l'animale.
+                        <br><br>
+                        Oggi le sue opere sono ricercate da chi comprende che il vero lusso risiede nell'autenticità e nella fatica manuale.
+                    </p>
+                </div>
+            </div>
+            <div class="video-interview-section">
+                <div style="text-align: center; cursor: pointer;">
+                    <div style="font-size: 4rem; color: var(--gold); margin-bottom: 1rem;">▶</div>
+                    <span class="text-small">GUARDA IL DOCUMENTARIO</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CONTACTS -->
+        <section id="contacts-page" class="page-section">
+            <div class="contact-wrap">
+                <div class="form-box">
+                    <span class="text-small" style="text-align:center;">COMMISSIONI & ACQUISIZIONI</span>
+                    <h1 class="font-serif" style="text-align:center; font-size: 3rem; margin-bottom: 3rem;">Trattative Riservate</h1>
+                    <form onsubmit="event.preventDefault(); alert('Grazie. La tua richiesta è stata ricevuta.');">
+                        <div class="input-group"><input type="text" class="input-field" placeholder="NOME E COGNOME" required></div>
+                        <div class="input-group"><input type="email" class="input-field" placeholder="EMAIL" required></div>
+                        <div class="input-group"><input type="text" class="input-field" placeholder="INTERESSE (Es. Opera 'Vulcano')"></div>
+                        <div class="input-group"><input type="text" class="input-field" placeholder="MESSAGGIO" required></div>
+                        
+                        <!-- PRIVACY CHECKBOX -->
+                        <div class="privacy-group">
+                            <input type="checkbox" id="privacy" required>
+                            <label for="privacy">HO LETTO E ACCETTO LA <a href="#" style="text-decoration:underline;">PRIVACY POLICY</a></label>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 4rem;">
+                            <button class="btn-solid" type="submit">INVIA RICHIESTA</button>
+                        </div>
+                    </form>
+                    <div style="text-align: center; margin-top: 3rem; color: #555; font-size: 0.8rem; letter-spacing: 0.1em;">MANAGEMENT EMILIO CIONI<br>LAJATICO, TOSCANA</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCROLL TOP -->
+        <div id="scroll-top-btn" onclick="lenis.scrollTo(0)">
+            <span>↑ TORNA SU</span>
+        </div>
+
+        <footer>
+            <div class="footer-col">
+                <span class="white">EMILIO CIONI</span>
+                © 2025 ALL RIGHTS RESERVED
+            </div>
+            <div class="footer-col center">
+                <span style="color:#888; font-size:0.6rem;">DESIGNED BY:</span>
+                <span class="white" style="letter-spacing: 0.1em;">AT STUDIO</span>
+                <span style="font-size:0.6rem;">MAURO TONCELLI + ANNA GALLUCCI</span>
+            </div>
+            <div class="footer-col right">
+                <span style="display:inline-block; margin-right:2rem;">INSTAGRAM</span>
+                <span style="display:inline-block;">LEGAL</span>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- DETAIL OVERLAY -->
+    <div id="detail-overlay" data-lenis-prevent>
+        <button class="do-close" onclick="details.close()">CHIUDI SCHEDA X</button>
+        
+        <div class="do-header" id="do-hero-bg" style="background-size: cover; background-position: center;">
+            <div style="z-index: 2;">
+                <span class="text-small" id="do-cat">CATEGORIA</span>
+                <h1 class="font-serif" style="font-size: 4rem; line-height: 1;" id="do-title">TITOLO OPERA</h1>
+            </div>
+            <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, #050505, transparent); z-index: 1;"></div>
+        </div>
+
+        <div class="do-content">
+            <div class="do-intro-grid">
+                <div>
+                    <p id="do-desc" style="font-size: 1.2rem; color: #ddd;">Descrizione completa...</p>
+                    <div style="margin-top: 3rem; border-top: 1px solid #333; padding-top: 2rem;">
+                        <span class="text-small">PROVENIENZA</span>
+                        <p id="do-prov" style="font-family:'Playfair Display'; font-style:italic; font-size:1.1rem; color:#fff; margin-bottom:2rem;">Collezione...</p>
+                        
+                        <span class="text-small">SPECIFICHE</span>
+                        <ul id="do-specs" style="margin-top: 1rem; line-height: 2; font-size: 0.9rem; color: #999;"></ul>
+                    </div>
+                    <div style="margin-top: 3rem;"><button class="btn-solid">Richiedi Disponibilità</button></div>
+                </div>
+                <div>
+                    <span class="text-small">VIDEO DI PRESENTAZIONE</span>
+                    <!-- VIDEO PLACEHOLDER WITH COVER -->
+                    <div class="video-box-improved" style="background-image: url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=800');">
+                        <div class="play-btn"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <span class="text-small" style="display:block; margin-bottom:2rem; text-align:center;">DETTAGLI OPERA</span>
+                <div class="masonry-gallery" id="masonry-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <script>
+        // CURSOR
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX; const posY = e.clientY;
+            cursorDot.style.left = `${posX}px`; cursorDot.style.top = `${posY}px`;
+            cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+        });
+
+        const interactiveElements = document.querySelectorAll('a, button, .hw-visual, .grid-item, .nav-item, .do-close, .video-box-improved, #scroll-top-btn, label, input');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+
+        // DB WITH 6 IMAGES PER ITEM FOR MASONRY
+        const db = [
+            { 
+                id: 'vulcano', type: 'art', home: true, title: 'Vulcano', cat: 'OPERA UNICA 2024', status: 'Disponibile', 
+                desc: 'Nato dalla fiamma viva. Un pezzo che respira ancora il calore della fucina. Le imperfezioni sono lasciate intenzionalmente per raccontare la fatica del lavoro manuale. La torsione del collo richiama la potenza dello stallone prima della carica.', 
+                prov: 'Studio dell\'Artista, Lajatico',
+                specs: ['Materiale: Ferro battuto', 'Dimensioni: 80x40cm', 'Peso: 12kg', 'Anno: 2024'], 
+                img: 'https://images.unsplash.com/photo-1504198458649-3128b932f49e?q=80&w=1000&auto=format&fit=crop', 
+                gallery: [
+                    'https://images.unsplash.com/photo-1504198458649-3128b932f49e?q=80&w=800', 'https://images.unsplash.com/photo-1615671524827-c1fe3973b648?q=80&w=800',
+                    'https://images.unsplash.com/photo-1518386377786-d25086c75c5e?q=80&w=800', 'https://images.unsplash.com/photo-1598556776374-0a3754966d51?q=80&w=800',
+                    'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?q=80&w=800', 'https://images.unsplash.com/photo-1627821639699-52dfc5340ebc?q=80&w=800'
+                ] 
+            },
+            { 
+                id: 'anima', type: 'art', home: true, title: 'Anima Libera', cat: 'ACQUISITA ABF', status: 'Collezione Privata', 
+                desc: 'Venduta per 10.000€ prima dell\'asta ABF. Un intreccio di 12 ferri che sfida la gravità. Rappresenta la leggerezza dell\'anima che si stacca da terra. Un\'opera eterea, dove il vuoto conta quanto il pieno.', 
+                prov: 'Collezione Privata, ABF Foundation',
+                specs: ['Materiale: Ferri riciclati', 'Dimensioni: 120x60cm', 'Peso: 18kg', 'Anno: 2023'], 
+                img: 'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=1000&auto=format&fit=crop', 
+                gallery: [
+                    'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=800', 'https://images.unsplash.com/photo-1534251662483-4eb2c332e3ea?q=80&w=800',
+                    'https://images.unsplash.com/photo-1582239634217-3721319d677a?q=80&w=800', 'https://images.unsplash.com/photo-1601625463687-25541fb72f62?q=80&w=800',
+                    'https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=800', 'https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?q=80&w=800'
+                ]
+            },
+            { id: 'destriero', type: 'art', home: true, title: 'Il Destriero', cat: 'TRATTATIVA RISERVATA', status: 'Disponibile', desc: 'Ferri appartenuti al campione "Varenne II". Un pezzo di storia dell\'ippica italiana trasformato in scultura cinetica statica. La muscolatura è resa attraverso la sovrapposizione di strati metallici saldati a 1400 gradi.', prov: 'Collezione Privata, Milano', specs: ['Materiale: Ferro e Acciaio', 'Dimensioni: 90x50cm', 'Peso: 22kg', 'Anno: 2024'], img: 'https://images.unsplash.com/photo-1534251662483-4eb2c332e3ea?q=80&w=1000', gallery: ['https://images.unsplash.com/photo-1534251662483-4eb2c332e3ea', 'https://images.unsplash.com/photo-1598556776374-0a3754966d51', 'https://images.unsplash.com/photo-1615671524827-c1fe3973b648', 'https://images.unsplash.com/photo-1551884170-09fb70a3a2ed', 'https://images.unsplash.com/photo-1504198458649-3128b932f49e', 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc'] },
+            { id: 'origine', type: 'art', home: true, title: 'L\'Origine', cat: 'COLLEZIONE BOCELLI', status: 'Non in vendita', desc: 'Il primo pezzo mai creato. Grezzo, brutale, sincero. Conservato nelle scuderie di Lajatico come monito e ispirazione. Rappresenta la scintilla iniziale della passione di Emilio.', prov: 'Archivio Storico Cioni', specs: ['Materiale: Ferro Grezzo', 'Dimensioni: 40x40cm', 'Peso: 8kg', 'Anno: 2010'], img: 'https://images.unsplash.com/photo-1615671524827-c1fe3973b648?q=80&w=1000', gallery: ['https://images.unsplash.com/photo-1615671524827-c1fe3973b648', 'https://images.unsplash.com/photo-1504198458649-3128b932f49e', 'https://images.unsplash.com/photo-1534251662483-4eb2c332e3ea', 'https://images.unsplash.com/photo-1550989460-0adf9ea622e2', 'https://images.unsplash.com/photo-1582239634217-3721319d677a', 'https://images.unsplash.com/photo-1595428774223-ef52624120d2'] },
+            { id: 'zoccolo', type: 'art', home: false, title: 'Zoccolo d\'Oro', cat: 'SERIE LIMITATA', status: 'Disponibile', desc: 'Un omaggio alla parte più importante del cavallo. Rifinito con una leggera patina dorata a caldo.', prov: 'Studio dell\'Artista', specs: ['Materiale: Ferro e Ottone', 'Dimensioni: 30x30cm', 'Peso: 5kg', 'Anno: 2024'], img: 'https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?q=80&w=1000', gallery: ['https://images.unsplash.com/photo-1551884170-09fb70a3a2ed', 'https://images.unsplash.com/photo-1504198458649-3128b932f49e', 'https://images.unsplash.com/photo-1615671524827-c1fe3973b648', 'https://images.unsplash.com/photo-1534251662483-4eb2c332e3ea', 'https://images.unsplash.com/photo-1598556776374-0a3754966d51', 'https://images.unsplash.com/photo-1550989460-0adf9ea622e2'] },
+            { id: 'criniera', type: 'art', home: false, title: 'La Criniera', cat: 'OPERA UNICA', status: 'Acquisita', desc: 'Un\'esplosione di metallo che simula il movimento della criniera al vento. Dinamismo puro.', prov: 'Collezione Privata, Dubai', specs: ['Materiale: Filo di ferro', 'Dimensioni: 100x80cm', 'Peso: 15kg', 'Anno: 2023'], img: 'https://images.unsplash.com/photo-1535083167123-286899738f6d?q=80&w=1000', gallery: ['https://images.unsplash.com/photo-1535083167123-286899738f6d', 'https://images.unsplash.com/photo-1504198458649-3128b932f49e', 'https://images.unsplash.com/photo-1615671524827-c1fe3973b648', 'https://images.unsplash.com/photo-1551884170-09fb70a3a2ed', 'https://images.unsplash.com/photo-1534251662483-4eb2c332e3ea', 'https://images.unsplash.com/photo-1582239634217-3721319d677a'] },
+            { id: 'tavolo-quercia', type: 'design', title: 'Tavolo Quercia', cat: 'FERRO E LEGNO', status: 'Ordinabile', desc: 'Base in ferri di cavallo intrecciati che sorregge un piano in quercia secolare di 8cm. Il contrasto tra il metallo freddo e il legno caldo.', prov: 'Showroom Segnobianco', specs: ['Legno: Quercia', 'Base: Ferro nero', 'Posti: 8', 'Peso: 80kg'], img: 'https://images.unsplash.com/photo-1601625463687-25541fb72f62?q=80&w=1000', gallery: ['https://images.unsplash.com/photo-1601625463687-25541fb72f62', 'https://images.unsplash.com/photo-1595428774223-ef52624120d2', 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7', 'https://images.unsplash.com/photo-1582239634217-3721319d677a', 'https://images.unsplash.com/photo-1504198458649-3128b932f49e', 'https://images.unsplash.com/photo-1550989460-0adf9ea622e2'] },
+            { id: 'console-radice', type: 'design', title: 'Console Radice', cat: 'PEZZO UNICO', status: 'Disponibile', desc: 'Una console da ingresso stretta, dove i ferri sembrano radici che escono dal pavimento per sorreggere un piano in cristallo fumé.', prov: 'Studio dell\'Artista', specs: ['Piano: Cristallo', 'Base: Ferro', 'Larghezza: 120cm', 'Peso: 30kg'], img: 'https://images.unsplash.com/photo-1582239634217-3721319d677a?q=80&w=1000', gallery: ['https://images.unsplash.com/photo-1582239634217-3721319d677a', 'https://images.unsplash.com/photo-1601625463687-25541fb72f62', 'https://images.unsplash.com/photo-1595428774223-ef52624120d2', 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7', 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc', 'https://images.unsplash.com/photo-1551884170-09fb70a3a2ed'] },
+            { id: 'panca-veneta', type: 'design', title: 'Panca Veneta', cat: 'LIMITED EDITION', status: 'Ordinabile', desc: 'Seduta realizzata con legno di recupero dalle briccole veneziane, con supporti laterali forgiati a mano.', prov: 'Showroom Segnobianco', specs: ['Legno: Briccola', 'Supporti: Acciaio', 'Lunghezza: 180cm', 'Peso: 40kg'], img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1000', gallery: ['https://images.unsplash.com/photo-1586023492125-27b2c045efd7', 'https://images.unsplash.com/photo-1601625463687-25541fb72f62', 'https://images.unsplash.com/photo-1595428774223-ef52624120d2', 'https://images.unsplash.com/photo-1582239634217-3721319d677a', 'https://images.unsplash.com/photo-1504198458649-3128b932f49e', 'https://images.unsplash.com/photo-1550989460-0adf9ea622e2'] },
+            { id: 'libreria-staffa', type: 'design', title: 'Libreria Staffa', cat: 'SU MISURA', status: 'Progetto', desc: 'Struttura modulare per pareti importanti. Le staffe di supporto sono vecchi ferri raddrizzati e risaldati.', prov: 'Studio dell\'Artista', specs: ['Struttura: Modulare', 'Mensole: Noce', 'Altezza: Variabile', 'Peso: Variabile'], img: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=1000', gallery: ['https://images.unsplash.com/photo-1595428774223-ef52624120d2', 'https://images.unsplash.com/photo-1601625463687-25541fb72f62', 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7', 'https://images.unsplash.com/photo-1582239634217-3721319d677a', 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc', 'https://images.unsplash.com/photo-1551884170-09fb70a3a2ed'] }
+        ];
+
+        // INIT
+        const lenis = new Lenis({ duration: 1.2, smooth: true });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+        gsap.registerPlugin(ScrollTrigger);
+
+        // POPULATE
+        function renderContent() {
+            const homeContainer = document.getElementById('home-works-anchor');
+            db.filter(i => i.home).forEach(item => {
+                homeContainer.innerHTML += `<div class="hw-item"><div class="hw-visual" onclick="details.open('${item.id}')"><div style="width:100%; height:100%; background-image: url('${item.img}'); background-size:cover; background-position:center; filter: grayscale(100%);"></div></div><div class="hw-info"><span class="status-badge ${item.status === 'Disponibile' ? 'active' : ''}">${item.status}</span><h2 class="font-serif" style="font-size:3rem; margin-bottom:1rem;">${item.title}</h2><p>${item.desc}</p><button class="btn-link" onclick="details.open('${item.id}')">Esplora Opera</button></div></div>`;
+            });
+            const colContainer = document.getElementById('collection-grid');
+            db.filter(i => i.type === 'art').forEach(item => {
+                colContainer.innerHTML += `<div class="grid-item" onclick="details.open('${item.id}')"><div class="grid-img" style="background-image: url('${item.img}'); background-size:cover; background-position:center; filter: grayscale(100%);"></div><span class="text-small">${item.cat}</span><h3 class="font-serif" style="font-size: 2rem;">${item.title}</h3></div>`;
+            });
+            const desContainer = document.getElementById('design-grid');
+            db.filter(i => i.type === 'design').forEach(item => {
+                desContainer.innerHTML += `<div class="grid-item" onclick="details.open('${item.id}')"><div class="grid-img" style="background-image: url('${item.img}'); background-size:cover; background-position:center; filter: grayscale(100%);"></div><span class="text-small">${item.cat}</span><h3 class="font-serif" style="font-size: 2rem;">${item.title}</h3></div>`;
+            });
+            // Re-bind cursor listeners
+            document.querySelectorAll('.hw-visual, .grid-item, button, .video-box-improved').forEach(el => {
+                el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+            });
+        }
+        renderContent();
+
+        // ANIMATIONS
+        const tlLoad = gsap.timeline();
+        tlLoad.to(".cls-1", { opacity: 1, y: 0, duration: 1, stagger: 0.05, ease: "power2.out" })
+              .to(".loader", { y: "-100%", duration: 1, ease: "power4.inOut", delay: 0.5 })
+              .to(".hero-sub", { y: 0, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.4")
+              .to(".hero-main", { y: 0, opacity: 1, stagger: 0.2, duration: 1.2, ease: "power3.out" }, "-=0.8")
+              .to(".hero-cta-wrap", { y: 0, opacity: 1, duration: 1, ease: "power2.out" }, "-=0.5");
+
+        // ROUTER & DETAILS
+        const router = {
+            go: function(pageId, btn) {
+                // Update active state in menu
+                document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+                if(btn) btn.classList.add('active');
+                else {
+                    // Fallback to find by ID/text if btn not passed
+                    const items = document.querySelectorAll('.nav-item');
+                    if(pageId === 'home') items[0].classList.add('active');
+                    if(pageId === 'collection') items[1].classList.add('active');
+                    if(pageId === 'artist') items[2].classList.add('active');
+                    if(pageId === 'design') items[3].classList.add('active');
+                    if(pageId === 'contacts') items[4].classList.add('active');
+                }
+
+                if(document.getElementById('detail-overlay').classList.contains('open')) details.close();
+                const current = document.querySelector('.page-section.active');
+                const next = document.getElementById(pageId + '-page');
+                if(current === next) return;
+                gsap.to(current, { opacity: 0, duration: 0.5, onComplete: () => {
+                    current.classList.remove('active');
+                    next.classList.add('active');
+                    window.scrollTo(0,0);
+                    lenis.scrollTo(0, {immediate:true});
+                    gsap.to(next, { opacity: 1, duration: 0.8 });
+                }});
+            },
+            scrollToWorks: function() { lenis.scrollTo('#home-works-anchor'); }
+        };
+
+        // SMART NAV LOGIC
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            const nav = document.getElementById('navbar');
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                nav.classList.add('nav-hidden');
+            } else {
+                nav.classList.remove('nav-hidden');
+            }
+            lastScroll = currentScroll;
+        });
+
+        const details = {
+            overlay: document.getElementById('detail-overlay'),
+            masonryContainer: document.getElementById('masonry-container'),
+            open: function(id) {
+                lenis.stop();
+                const item = db.find(i => i.id === id);
+                if(!item) return;
+                
+                document.getElementById('do-title').innerText = item.title;
+                document.getElementById('do-cat').innerText = item.cat;
+                document.getElementById('do-desc').innerText = item.desc;
+                document.getElementById('do-prov').innerText = item.prov || 'Collezione Privata'; // Provenance
+                document.getElementById('do-hero-bg').style.backgroundImage = `url('${item.img}')`;
+                const specsList = document.getElementById('do-specs');
+                specsList.innerHTML = '';
+                item.specs.forEach(s => specsList.innerHTML += `<li>${s}</li>`);
+                
+                this.masonryContainer.innerHTML = '';
+                item.gallery.forEach((url, index) => {
+                    const img = document.createElement('div');
+                    img.className = 'masonry-img';
+                    img.style.backgroundImage = `url('${url}')`;
+                    const height = Math.floor(Math.random() * (60 - 40 + 1) + 40); 
+                    img.style.height = `${height}vh`;
+                    img.style.backgroundSize = 'cover';
+                    img.style.backgroundPosition = 'center';
+                    this.masonryContainer.appendChild(img);
+                });
+
+                this.overlay.classList.add('open');
+                
+                gsap.to('.masonry-img', {
+                    opacity: 1, y: 0, duration: 0.8, stagger: 0.1, delay: 0.5, ease: "power2.out"
+                });
+            },
+            close: function() { lenis.start(); this.overlay.classList.remove('open'); }
+        };
+    </script>
+</body>
+</html>
