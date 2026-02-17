@@ -1,0 +1,51 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer.astro';
+import MasonryGrid from '../components/MasonryGrid.astro';
+import DetailOverlay from '../components/DetailOverlay';
+---
+
+<MainLayout title="Collezione | EMILIANO CIONI">
+  <Navbar client:load />
+  
+  <main class="app-wrapper relative w-full pt-[120px] md:pt-[100px]">
+    <div class="grid-header py-16 px-[5vw] md:px-[10vw] text-center">
+      <span class="text-small">COLLEZIONE ARTE</span>
+      <h1 class="font-serif text-6xl">Collezione</h1>
+    </div>
+    
+    <MasonryGrid type="art" />
+
+    <!-- SCROLL TOP -->
+    <div id="scroll-top-btn" class="flex justify-center items-center w-full py-8 cursor-pointer text-[var(--color-gold)] text-xs tracking-wider uppercase z-[9100] relative cursor-hover">
+      <span class="border-b border-[var(--color-gold)] pb-1">↑ TORNA SU</span>
+    </div>
+
+    <Footer />
+  </main>
+
+  <DetailOverlay client:load />
+
+  <script>
+    // OVERLAY TRIGGER
+    import { overlayStore } from '../stores/overlayStore';
+    
+    document.querySelectorAll('[data-work-id]').forEach(el => {
+      el.addEventListener('click', () => {
+        const workId = el.getAttribute('data-work-id');
+        overlayStore.set({ isOpen: true, workId });
+      });
+    });
+
+    // SCROLL TO TOP
+    document.getElementById('scroll-top-btn')?.addEventListener('click', () => {
+      if (window.lenis) {
+        window.lenis.scrollTo(0);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  </script>
+</MainLayout>
+

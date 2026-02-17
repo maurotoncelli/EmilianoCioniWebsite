@@ -1,0 +1,130 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer.astro';
+import Preloader from '../components/Preloader';
+import DetailOverlay from '../components/DetailOverlay';
+import works from '../data/works.json';
+
+const homeWorks = works.filter(work => work.home);
+---
+
+<MainLayout>
+  <Preloader client:load />
+  <Navbar client:load />
+  
+  <main class="app-wrapper relative w-full">
+    <!-- HERO -->
+    <section class="hero h-screen w-full relative flex justify-center items-center flex-col">
+      <div class="hero-bg absolute top-0 left-0 w-full h-full -z-10"
+        style="filter: grayscale(100%) contrast(1.1) brightness(0.6);">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          poster="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?q=80&w=1500&auto=format&fit=crop"
+          class="w-full h-full object-cover"
+        >
+          <source src="https://videos.pexels.com/video-files/4215784/4215784-hd_1920_1080_25fps.mp4" type="video/mp4">
+        </video>
+      </div>
+      
+      <div class="hero-text-container z-[2] text-center flex flex-col items-center justify-center gap-4">
+        <div class="hero-line-wrap overflow-hidden">
+          <div class="hero-sub font-sans font-light text-sm tracking-[0.4em] uppercase text-[#ccc] translate-y-full opacity-0">
+            NELLE SCUDERIE DI LAJATICO
+          </div>
+        </div>
+        <div class="hero-line-wrap overflow-hidden mt-4">
+          <h1 class="hero-main font-serif font-normal text-[4.5vw] text-white uppercase tracking-wide leading-tight translate-y-full opacity-0">
+            L'ANIMA DEL CAVALLO
+          </h1>
+        </div>
+        <div class="hero-line-wrap overflow-hidden">
+          <h1 class="hero-main italic font-serif font-normal text-[4.5vw] text-[var(--color-text-main)] leading-tight translate-y-full opacity-0">
+            FORGIATA NEL FERRO
+          </h1>
+        </div>
+      </div>
+      
+      <div class="hero-cta-wrap mt-12 translate-y-5 opacity-0">
+        <a href="#home-works-anchor" class="text-xs tracking-[0.3em] border-b border-white pb-1 cursor-hover">
+          VEDI TUTTA LA COLLEZIONE
+        </a>
+      </div>
+    </section>
+
+    <!-- HOME WORKS -->
+    <div id="home-works-anchor" class="py-24"></div>
+    
+    {homeWorks.map((work, index) => (
+      <div class={`hw-item flex items-center justify-between mb-32 px-[10vw] min-h-[70vh] ${index % 2 === 1 ? 'flex-row-reverse' : ''}`}>
+        <div
+          class="hw-visual w-[48%] h-[65vh] bg-[#1a1a1a] relative transition-transform duration-600 hover:scale-[1.02] cursor-pointer cursor-hover"
+          style="mask-image: radial-gradient(circle, black 30%, transparent 100%); -webkit-mask-image: radial-gradient(circle, black 30%, transparent 100%);"
+          data-work-id={work.id}
+        >
+          <div
+            class="w-full h-full bg-cover bg-center"
+            style={`background-image: url('${work.mainImage}'); filter: grayscale(100%);`}
+          ></div>
+        </div>
+        
+        <div class="hw-info w-[42%] p-8">
+          <span class={`status-badge font-mono text-xs uppercase py-1 px-2 inline-block mb-6 relative z-[9000] ${work.status === 'Disponibile' ? 'text-[var(--color-gold)]' : 'text-[#666]'}`}>
+            {work.status}
+          </span>
+          <h2 class="font-serif text-5xl" style="margin-bottom: 3rem;">{work.title}</h2>
+          <p class="leading-relaxed">{work.description}</p>
+          <button class="btn-link cursor-hover" data-work-id={work.id}>Esplora Opera</button>
+        </div>
+      </div>
+    ))}
+
+    <!-- ARTIST PREVIEW -->
+    <div class="artist-preview py-24 px-[10vw] bg-[#080808] border-t border-[var(--color-border)] grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div
+        class="h-[60vh] bg-[#222] bg-cover filter grayscale"
+        style="background-image: url('https://images.unsplash.com/photo-1589828952059-0743b593673c?q=80&w=1000&auto=format&fit=crop');"
+      ></div>
+      <div>
+        <span class="text-small">MAESTRO STALLIERE</span>
+        <h2 class="font-serif text-5xl" style="margin-bottom: 2rem;">Emiliano Cioni</h2>
+        <p>Dalle scuderie di Lajatico alle collezioni private più esclusive. Una vita passata ad ascoltare il respiro dei cavalli per poi renderlo eterno nel metallo.</p>
+        <a href="/artist" class="btn-solid inline-block cursor-hover">Scopri la Storia</a>
+      </div>
+    </div>
+
+    <!-- SCROLL TOP -->
+    <div id="scroll-top-btn" class="flex justify-center items-center w-full py-8 cursor-pointer text-[var(--color-gold)] text-xs tracking-wider uppercase z-[9100] relative cursor-hover">
+      <span class="border-b border-[var(--color-gold)] pb-1">↑ TORNA SU</span>
+    </div>
+
+    <Footer />
+  </main>
+
+  <DetailOverlay client:load />
+
+  <script>
+    // OVERLAY TRIGGER
+    import { overlayStore } from '../stores/overlayStore';
+    
+    document.querySelectorAll('[data-work-id]').forEach(el => {
+      el.addEventListener('click', () => {
+        const workId = el.getAttribute('data-work-id');
+        overlayStore.set({ isOpen: true, workId });
+      });
+    });
+
+    // SCROLL TO TOP
+    document.getElementById('scroll-top-btn')?.addEventListener('click', () => {
+      if (window.lenis) {
+        window.lenis.scrollTo(0);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  </script>
+</MainLayout>

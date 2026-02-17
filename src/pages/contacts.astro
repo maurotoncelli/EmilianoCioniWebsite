@@ -1,0 +1,109 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer.astro';
+---
+
+<MainLayout title="Contatti | EMILIANO CIONI">
+  <Navbar client:load />
+  
+  <main class="app-wrapper relative w-full pt-[120px] md:pt-[100px]">
+    <div class="contact-wrap min-h-[80vh] flex items-center justify-center py-16">
+      <div class="form-box w-full max-w-[600px] px-[5vw] md:px-8">
+        <span class="text-small text-center">COMMISSIONI & ACQUISIZIONI</span>
+        <h1 class="font-serif text-center text-5xl" style="margin-bottom: 3rem;">Trattative Riservate</h1>
+        
+        <form id="contact-form">
+          <div class="input-group mb-10">
+            <input
+              type="text"
+              name="name"
+              class="input-field w-full bg-transparent border-b border-[#333] py-4 font-sans text-white text-lg outline-none transition-all duration-300 focus:border-[var(--color-gold)] cursor-hover"
+              placeholder="NOME E COGNOME"
+              required
+            />
+          </div>
+          
+          <div class="input-group mb-10">
+            <input
+              type="email"
+              name="email"
+              class="input-field w-full bg-transparent border-b border-[#333] py-4 font-sans text-white text-lg outline-none transition-all duration-300 focus:border-[var(--color-gold)] cursor-hover"
+              placeholder="EMAIL"
+              required
+            />
+          </div>
+          
+          <div class="input-group mb-10">
+            <input
+              type="text"
+              name="interest"
+              class="input-field w-full bg-transparent border-b border-[#333] py-4 font-sans text-white text-lg outline-none transition-all duration-300 focus:border-[var(--color-gold)] cursor-hover"
+              placeholder="INTERESSE (Es. Opera 'Vulcano')"
+            />
+          </div>
+          
+          <div class="input-group mb-10">
+            <input
+              type="text"
+              name="message"
+              class="input-field w-full bg-transparent border-b border-[#333] py-4 font-sans text-white text-lg outline-none transition-all duration-300 focus:border-[var(--color-gold)] cursor-hover"
+              placeholder="MESSAGGIO"
+              required
+            />
+          </div>
+          
+          <!-- PRIVACY CHECKBOX -->
+          <div class="privacy-group flex items-center gap-3 mb-12 text-xs text-[#888] uppercase tracking-wide">
+            <input
+              type="checkbox"
+              id="privacy"
+              name="privacy"
+              class="w-4 h-4 bg-transparent border border-[#333] cursor-pointer cursor-hover"
+              style="accent-color: var(--color-gold);"
+              required
+            />
+            <label for="privacy" class="cursor-pointer cursor-hover">
+              HO LETTO E ACCETTO LA <a href="/privacy" class="text-[var(--color-gold)] underline hover:opacity-70 transition-opacity duration-300">PRIVACY POLICY</a>
+            </label>
+          </div>
+
+          <div class="text-center mt-16">
+            <button type="submit" class="btn-solid">INVIA RICHIESTA</button>
+          </div>
+        </form>
+        
+        <div class="text-center mt-12 text-[#555] text-sm tracking-wide">
+          MANAGEMENT EMILIANO CIONI<br>LAJATICO, TOSCANA
+        </div>
+      </div>
+    </div>
+
+    <!-- SCROLL TOP -->
+    <div id="scroll-top-btn" class="flex justify-center items-center w-full py-8 cursor-pointer text-[var(--color-gold)] text-xs tracking-wider uppercase z-[9100] relative cursor-hover">
+      <span class="border-b border-[var(--color-gold)] pb-1">↑ TORNA SU</span>
+    </div>
+
+    <Footer />
+  </main>
+
+  <script>
+    // FORM SUBMIT
+    const form = document.getElementById('contact-form');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Grazie. La tua richiesta è stata ricevuta.');
+      form.reset();
+    });
+
+    // SCROLL TO TOP
+    document.getElementById('scroll-top-btn')?.addEventListener('click', () => {
+      if (window.lenis) {
+        window.lenis.scrollTo(0);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  </script>
+</MainLayout>
+

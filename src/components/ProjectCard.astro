@@ -1,0 +1,28 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  category: string;
+  image: string;
+  description: string;
+}
+
+const { id, title, category, image, description } = Astro.props;
+---
+
+<div class="grid-item cursor-pointer cursor-hover" data-work-id={id}>
+  <div
+    class="grid-img h-[50vh] bg-[#1a1a1a] mb-6 transition-opacity duration-300 bg-cover bg-center"
+    style={`background-image: url('${image}'); filter: grayscale(100%);`}
+  ></div>
+  <span class="text-small">{category}</span>
+  <h3 class="font-serif text-3xl" style="margin-bottom: 1.5rem;">{title}</h3>
+  <p class="text-[var(--color-text-muted)] text-sm leading-relaxed line-clamp-3">{description}</p>
+</div>
+
+<style>
+  .grid-item:hover .grid-img {
+    opacity: 0.8;
+  }
+</style>
+

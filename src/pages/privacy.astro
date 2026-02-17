@@ -1,0 +1,73 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer.astro';
+import privacyData from '../data/privacy.json';
+---
+
+<MainLayout title="Privacy Policy | EMILIANO CIONI" description="Informativa sulla privacy e trattamento dei dati personali di Emiliano Cioni">
+  <Navbar client:load />
+  
+  <main class="app-wrapper relative w-full pt-[120px] md:pt-[100px]">
+    <div class="privacy-wrap py-16 px-[5vw] md:px-[10vw]">
+      <div class="privacy-header text-center mb-16 max-w-[800px] mx-auto">
+        <span class="text-small">PROTEZIONE DEI DATI</span>
+        <h1 class="font-serif text-5xl md:text-6xl mb-6">Privacy Policy</h1>
+        <p class="text-sm text-[#888] uppercase tracking-wider">
+          Ultimo aggiornamento: {privacyData.lastUpdate}
+        </p>
+      </div>
+
+      <div class="privacy-content max-w-[900px] mx-auto">
+        {privacyData.sections.map((section, index) => (
+          <article class="privacy-section mb-16">
+            <h2 class="font-serif text-2xl md:text-3xl mb-6 text-[var(--color-text-main)]">
+              {index + 1}. {section.title}
+            </h2>
+            <div 
+              class="privacy-text text-base md:text-lg leading-relaxed text-[#bbb]"
+              set:html={section.content}
+            />
+          </article>
+        ))}
+      </div>
+
+      <!-- Back to contacts -->
+      <div class="text-center mt-16 pt-16 border-t border-[var(--color-border)]">
+        <a href="/contacts" class="btn-solid inline-block cursor-hover">Torna ai Contatti</a>
+      </div>
+    </div>
+
+    <!-- SCROLL TOP -->
+    <div id="scroll-top-btn" class="flex justify-center items-center w-full py-8 cursor-pointer text-[var(--color-gold)] text-xs tracking-wider uppercase z-[9100] relative cursor-hover">
+      <span class="border-b border-[var(--color-gold)] pb-1">↑ TORNA SU</span>
+    </div>
+
+    <Footer />
+  </main>
+
+  <script>
+    // SCROLL TO TOP
+    document.getElementById('scroll-top-btn')?.addEventListener('click', () => {
+      if (window.lenis) {
+        window.lenis.scrollTo(0);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  </script>
+</MainLayout>
+
+<style>
+  .privacy-text :global(strong) {
+    color: var(--color-text-main);
+    font-weight: 500;
+  }
+
+  .privacy-text :global(br) {
+    display: block;
+    content: "";
+    margin-top: 0.5rem;
+  }
+</style>
+

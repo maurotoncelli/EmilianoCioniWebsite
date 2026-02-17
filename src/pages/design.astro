@@ -1,0 +1,57 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer.astro';
+import MasonryGrid from '../components/MasonryGrid.astro';
+import DetailOverlay from '../components/DetailOverlay';
+---
+
+<MainLayout title="Collaborazioni | EMILIANO CIONI">
+  <Navbar client:load />
+  
+  <main class="app-wrapper relative w-full pt-[120px] md:pt-[100px]">
+    <div class="design-hero py-16 px-[10vw] text-center mb-16">
+      <span class="text-small">INTERIOR DESIGN</span>
+      <h1 class="font-serif text-[4rem] leading-tight" style="margin-bottom: 1rem;">Ferro e Legno</h1>
+      <p style="max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8;">
+        <span class="quote-design font-serif text-[2.5rem] text-[var(--color-gold)] italic block leading-[1.2]" style="margin-bottom: 2rem;">
+          "Non arredamento. Sculture abitabili."
+        </span><br>
+        Dall'incontro tra la visione contemporanea dello studio <strong>Segnobianco</strong> e la maestria ancestrale di Emiliano Cioni nasce una capsule collection senza precedenti. Tre opere di design funzionale dove il legno massello, caldo e vivo, riposa su strutture in ferro forgiato a mano, recuperato dalle vecchie scuderie. Non sono semplici tavoli, ma dialoghi materici tra la forza della terra e l'eleganza del segno. Ogni pezzo è numerato, unico e irripetibile.
+      </p>
+    </div>
+    
+    <MasonryGrid type="design" />
+
+    <!-- SCROLL TOP -->
+    <div id="scroll-top-btn" class="flex justify-center items-center w-full py-8 cursor-pointer text-[var(--color-gold)] text-xs tracking-wider uppercase z-[9100] relative cursor-hover">
+      <span class="border-b border-[var(--color-gold)] pb-1">↑ TORNA SU</span>
+    </div>
+
+    <Footer />
+  </main>
+
+  <DetailOverlay client:load />
+
+  <script>
+    // OVERLAY TRIGGER
+    import { overlayStore } from '../stores/overlayStore';
+    
+    document.querySelectorAll('[data-work-id]').forEach(el => {
+      el.addEventListener('click', () => {
+        const workId = el.getAttribute('data-work-id');
+        overlayStore.set({ isOpen: true, workId });
+      });
+    });
+
+    // SCROLL TO TOP
+    document.getElementById('scroll-top-btn')?.addEventListener('click', () => {
+      if (window.lenis) {
+        window.lenis.scrollTo(0);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  </script>
+</MainLayout>
+

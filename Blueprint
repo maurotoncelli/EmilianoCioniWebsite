@@ -1,0 +1,199 @@
+PROJECT BLUEPRINT: EMILIO CIONI -
+DIGITAL ATELIER
+Role: Senior Developer Architect Instruction Set
+Target: Cursor AI Agents
+Status: Production Ready Specification
+1. VISIONE E FILOSOFIA ARCHITETTURALE
+L'obiettivo è trasformare un prototipo HTML statico in una Web Application moderna,
+data-driven e scalabile. Il sito non è un semplice e-commerce, ma un dispositivo di
+"legittimazione culturale" per un artigiano di lusso.
+L'approccio deve essere Component-Based: ogni elemento visivo ripetuto deve diventare un
+componente riutilizzabile, separando rigorosamente la logica (JS/React), lo stile (Tailwind) e i dati
+(JSON/CMS). Il sito verrà poi messo online su Netilify attraverso Github
+Parole chiave: Quiet Luxury, Data-Driven, Headless-Ready, Performance First.
+2. STACK TECNOLOGICO (MANDATORY)
+Gli agenti devono inizializzare e strutturare il progetto utilizzando esclusivamente le seguenti
+tecnologie:
+●
+●
+●
+●
+●
+●
+●
+Core Framework: Astro (v4+). Scelto per le performance (Zero JS by default), la
+gestione del routing e l'ottimizzazione SEO nativa.
+UI Framework (Interactive Islands): React. Da utilizzare per componenti con stato
+complesso (Overlay Dettaglio, Masonry Grid, Menu Smart, Custom Cursor).
+Styling: Tailwind CSS. Configurazione centralizzata (Design System) per colori, font e
+spaziature.
+Animation Engine: GSAP (GreenSock) + ScrollTrigger. Per tutte le animazioni
+coreografiche.
+Smooth Scroll: Lenis. Per lo scorrimento inerziale "luxury".
+State Management: Nano Stores. Per gestire stati globali leggeri (es. apertura Overlay,
+lingua corrente) tra componenti Astro e React.
+Data Source: Inizialmente file JSON locali (/src/data), strutturati per mappare
+esattamente i campi di WordPress + ACF (Advanced Custom Fields) per la futura
+integrazione Headless.
+3. DESIGN SYSTEM & SPECIFICHE VISIVE
+Gli agenti devono estrarre i valori dalla demo HTML fornita, ma formalizzarli in
+tailwind.config.mjs.
+Palette Colori
+●
+●
+●
+●
+●
+Background Deep: #050505 (Nero materico, non assoluto).
+Background Panel: #0b0b0b (Per card e sezioni secondarie).
+Text Main: #E0E0E0 (Bianco sporco per leggibilità).
+Text Muted: #888888 (Per dettagli secondari).
+Accent/Gold: #C5A059 (Il colore "Scintilla", usato per hover, selezione testo, cursori).
+Tipografia
+●
+●
+●
+Display/Serif: Playfair Display (Titoli, Citazioni, Enfasi). Deve comunicare
+eleganza classica.
+Body/Sans: Manrope (Testi lunghi, Menu). Modernità e leggibilità tecnica.
+Tech/Mono: Space Mono (Dati tecnici, Status, Badge). Tocco archivistico/industriale.
+Atmosfera (Assets Globali)
+●
+●
+●
+Grain Overlay: Texture di rumore statico (SVG base64) in fixed position sopra tutto
+il sito (z-index 9000), opacity 0.04.
+Vignettatura: Gradiente radiale ai bordi dello schermo per focus centrale.
+Custom Cursor: Implementazione React. Dot centrale + Follower circolare fluido.
+○
+Comportamento: Hover state su link/button (ingrandimento + blend-mode).
+○
+Colore: Gold (#C5A059).
+○
+Constraint: Disabilitato via CSS/JS su dispositivi Touch.
+●
+4. COMPONENT ARCHITECTURE (LISTA TEMPLATE)
+Il sito deve essere smontato nei seguenti componenti atomici. Non deve esistere codice HTML
+duplicato nelle pagine.
+Layouts
+●
+MainLayout.astro: Contiene <head>, SEO meta tags, inizializzazione Lenis, Grain,
+Vignette, Cursore, Navbar e Footer.
+UI Components (Globali)
+●
+●
+●
+●
+Navbar.jsx (React): Menu di navigazione con logica "Smart Scroll" (nascondi su scroll
+down, mostra su scroll up). Gestione stato "Active" in base alla route.
+Footer.astro: Layout a 3 colonne (Copyright, Credits AT STUDIO centrali,
+Social/Legal). Z-Index elevato per leggibilità.
+Button.astro: Componente standard per i pulsanti .btn-solid e .btn-link.
+Preloader.jsx (React/GSAP): Logo SVG (tracciato animato) + Testo che si compone
+lettera per lettera. Deve sparire fluidamente rivelando la Hero.
+Feature Components (Data Driven)
+●
+ProjectCard.astro: La singola card usata nelle griglie.
+○
+Props: Titolo, Categoria/Status (con font Mono), Immagine (con effetto zoom
+hover), ID.
+○
+Interaction: Al click, non apre una nuova pagina ma invoca l'apertura dell'Overlay.
+●
+●
+●
+MasonryGrid.astro: Wrapper per le card. Deve gestire il layout responsive (2 colonne
+desktop, 1 mobile).
+DetailOverlay.jsx (React): Il componente più complesso.
+○
+Comportamento: Pannello a tutto schermo che scorre dal basso.
+○
+Gestione Scroll: Quando aperto, deve bloccare lo scroll del body (o usare
+data-lenis-prevent) e abilitare il proprio scroll interno.
+○
+Contenuti Dinamici: Riceve i dati dell'opera cliccata (Titolo, Desc, Video, Gallery).
+○
+Gallery Interna: Layout Masonry verticale (non slider).
+●
+5. DATA MODEL & CMS READINESS
+Struttura i dati in file JSON (src/data/works.json) simulando esattamente la risposta di una
+API WordPress con ACF.
+Schema Dati "Progetto/Opera":
+●
+●
+●
+●
+●
+●
+●
+●
+id: Slug univoco (es. "vulcano").
+type: "art" | "design".
+title: Stringa.
+category: Stringa (es. "OPERA UNICA 2024").
+status: Stringa (es. "Disponibile", "Collezione Privata").
+provenance: Stringa (es. "Collezione Privata, Milano"). Fondamentale.
+description: Stringa (HTML/Rich Text supportato).
+specifications: Array di oggetti { label: "Materiale", value: "Ferro" }.
+●
+●
+●
+mainImage: URL.
+videoCover: URL (Immagine poster).
+gallery: Array di URL immagini.
+6. ANIMAZIONI (GSAP SPECS)
+Le animazioni devono essere fedeli alla demo "Killer Edition".
+●
+Hero Reveal: Sequenza solenne.
+1. Buio/Video B&N per 0.5s.
+○
+1. Fade-in + Slide-up dei testi Hero (Stagger 0.2s, Duration 1.5s, Easing
+power3.out).
+○
+●
+●
+●
+●
+Page Transitions: Utilizzare le View Transitions di Astro per navigare tra le pagine
+senza refresh bianco.
+Overlay Entrance: Slide up dal basso (100% -> 0%) con easing cubic-bezier(0.7,
+0, 0.3, 1).
+Text Selection: Colore background #C5A059, testo nero.
+7. STRUTTURA PAGINE & CONTENUTI (INTEGRITÀ
+TOTALE)
+Gli agenti devono popolare le pagine Astro utilizzando esattamente i testi forniti nella demo
+HTML finale. Nessuna abbreviazione è permessa.
+1. Home (/): Video Hero B&N + 4 Opere in evidenza (layout alternato Zig-Zag) + Anteprima
+2. 3. 4. 5. Artista.
+Collezione (/collection): Griglia completa delle opere d'arte. Titolo "Collezione".
+Artista (/artist): Foto ritratto grande + Bio estesa ("Il Fabbro delle Stelle", date
+evidenziate in oro, citazioni) + Video manifesto placeholder.
+Collaborazioni (/design): Intro con testo specifico "Segnobianco" ("Non arredamento.
+Sculture abitabili") + Griglia progetti design.
+Contatti (/contacts): Form funzionale con campi input + Checkbox Privacy Policy
+(Obbligatoria) + Info management.
+8. OTTIMIZZAZIONE RESPONSIVE
+●
+Mobile (<768px):
+○
+Griglie: Passaggio forzato a 1 colonna.
+○
+Hero Text: Ridimensionamento fluido (clamp o media queries) per evitare rotture.
+○
+Menu: Semplificato (o mantenuto in lista verticale se poche voci, ma gestito per
+touch).
+○
+Cursore Custom: Nascosto.
+○
+Overlay: Scroll nativo abilitato con -webkit-overflow-scrolling: touch.
+●
+9. ISTRUZIONI OPERATIVE PER GLI AGENTI
+1. 2. 3. 4. 5. Analisi: Leggere il file HTML fornito per estrarre tutti i testi, i link alle immagini
+placeholder e i video.
+Setup: Creare la struttura Astro come descritto.
+Porting: Tradurre l'HTML statico in componenti JSX/Astro modulari.
+Styling: Convertire il CSS custom in classi di utilità Tailwind dove possibile, mantenendo
+il CSS custom solo per effetti specifici (Grana, Cursore) nel file global CSS.
+Logic: Implementare la logica React per l'Overlay che blocca lo scroll di Lenis quando
+aperto.
+6. Verifica: Assicurarsi che nessun contenuto testuale sia stato tagliato o modificato.

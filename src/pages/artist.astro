@@ -1,0 +1,83 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer.astro';
+---
+
+<MainLayout title="L'Artista | EMILIANO CIONI">
+  <Navbar client:load />
+  
+  <main class="app-wrapper relative w-full pt-[120px] md:pt-[100px]">
+    <!-- ARTIST HERO -->
+    <div class="artist-hero py-8 px-[10vw] grid grid-cols-1 md:grid-cols-[0.8fr_1fr] gap-16 min-h-[60vh]">
+      <div
+        class="artist-full-img h-[70vh] bg-[#222] bg-cover filter grayscale"
+        style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1500&auto=format&fit=crop');"
+      ></div>
+      
+      <div class="artist-bio pt-8 max-w-[700px]">
+        <h1 class="font-serif text-6xl" style="margin-bottom: 2rem;">Il Fabbro delle Stelle</h1>
+        <p>
+          Emiliano non lavora il ferro, lo ascolta. Nelle lunghe notti toscane, quando il silenzio della tenuta è rotto solo dal vento che scuote gli ulivi, lui accende la forgia. Non c'è disegno su carta, non c'è progetto CAD. C'è solo la memoria tattile di vent'anni passati a ferrare i cavalli più nobili del mondo.
+          <br><br>
+          Per oltre vent'anni, Emiliano ha vissuto all'ombra dei riflettori, curando i cavalli che hanno accompagnato la vita di Andrea Bocelli. Ma mentre il mondo ascoltava la voce del Maestro, Emiliano ascoltava il suono degli zoccoli e del martello.
+          <br><br>
+          "Tutto è iniziato con un ferro rotto," racconta. "Invece di buttarlo, l'ho scaldato. Ho visto una curva che mi ricordava il collo di un puledro appena nato."
+        </p>
+        
+        <blockquote class="font-serif italic text-2xl border-l-2 border-[var(--color-gold)] pl-8 my-12 text-[#ddd]">
+          "Io non creo nulla. Tolgo solo la ruggine e lascio che l'anima del cavallo esca fuori."
+        </blockquote>
+        
+        <p>
+          Ogni colpo di martello è una nota, ogni scintilla un ricordo. La sua arte è brutale e raffinata insieme: prende ciò che è stato scartato – il ferro consumato dalla corsa, corroso dalla terra e dal sudore – e gli dona una seconda vita, immobile ma vibrante di energia cinetica.
+          Non è solo tecnica metallurgica; è un atto di rispetto verso l'animale.
+          <br><br>
+          Oggi le sue opere sono ricercate da chi comprende che il vero lusso risiede nell'autenticità e nella fatica manuale.
+        </p>
+      </div>
+    </div>
+
+    <!-- SCROLL DOWN INDICATOR -->
+    <div class="scroll-indicator-container flex justify-center items-center py-16 sticky bottom-0 z-10 pointer-events-none">
+      <div class="scroll-indicator cursor-hover pointer-events-auto">
+        <div class="scroll-indicator-text text-xs tracking-widest uppercase text-[var(--color-text-muted)] mb-4">Scorri per il video</div>
+        <div class="scroll-indicator-arrow">
+          <svg width="30" height="60" viewBox="0 0 30 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 5 L15 45" stroke="var(--color-gold)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M8 38 L15 45 L22 38" stroke="var(--color-gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- VIDEO INTERVIEW -->
+    <div class="video-interview-section w-full h-[70vh] bg-black relative border-t border-b border-[var(--color-border)] flex items-center justify-center"
+      style="background-image: url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=1920&auto=format&fit=crop'); background-size: cover; background-position: center; filter: grayscale(100%) brightness(0.5);">
+      <div class="text-center cursor-pointer cursor-hover relative z-10">
+        <div class="text-6xl text-[var(--color-gold)] mb-4">▶</div>
+        <span class="text-small">GUARDA IL DOCUMENTARIO</span>
+      </div>
+    </div>
+
+    <!-- SCROLL TOP -->
+    <div id="scroll-top-btn" class="flex justify-center items-center w-full py-8 cursor-pointer text-[var(--color-gold)] text-xs tracking-wider uppercase z-[9100] relative cursor-hover">
+      <span class="border-b border-[var(--color-gold)] pb-1">↑ TORNA SU</span>
+    </div>
+
+    <Footer />
+  </main>
+
+  <script>
+    // SCROLL TO TOP
+    document.getElementById('scroll-top-btn')?.addEventListener('click', () => {
+      if (window.lenis) {
+        window.lenis.scrollTo(0);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  </script>
+</MainLayout>
+

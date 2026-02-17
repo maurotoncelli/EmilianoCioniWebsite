@@ -1,0 +1,38 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer.astro';
+---
+
+<MainLayout title="Pagina non trovata | EMILIANO CIONI">
+  <Navbar client:load />
+  
+  <main class="app-wrapper relative w-full pt-[120px] md:pt-[100px]">
+    <div class="error-wrap min-h-[80vh] flex items-center justify-center py-16 px-[5vw] md:px-[10vw]">
+      <div class="error-content text-center max-w-[800px]">
+        <span class="text-small">ERRORE 404</span>
+        <h1 class="font-serif text-[6rem] md:text-[8rem] leading-none mb-8 text-[var(--color-gold)]">404</h1>
+        <h2 class="font-serif text-3xl md:text-4xl mb-8">Pagina non trovata</h2>
+        <p class="text-lg leading-relaxed mb-12 text-[#bbb]">
+          La pagina che stai cercando sembra essere scomparsa nelle scuderie di Lajatico. 
+          <br>
+          Forse è stata forgiata in qualcos'altro.
+        </p>
+        <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+          <a href="/" class="btn-solid inline-block cursor-hover">Torna alla Home</a>
+          <a href="/collection" class="btn-link cursor-hover">Esplora la Collezione</a>
+        </div>
+      </div>
+    </div>
+
+    <Footer />
+  </main>
+
+  <script>
+    // Scroll to top on load
+    if (window.lenis) {
+      window.lenis.scrollTo(0, { immediate: true });
+    }
+  </script>
+</MainLayout>
+

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="vignette">
+      <stop offset="40%" style="stop-color:#050505;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#vignette)"/>
+  <text x="600" y="280" font-family="'Playfair Display', serif" font-size="72" font-weight="400" fill="#C5A059" text-anchor="middle">EMILIANO CIONI</text>
+  <text x="600" y="340" font-family="'Manrope', sans-serif" font-size="24" font-weight="300" fill="#888888" text-anchor="middle" letter-spacing="0.3em">MASTER BLACKSMITH</text>
+  <text x="600" y="420" font-family="'Manrope', sans-serif" font-size="18" font-weight="300" fill="#666666" text-anchor="middle" style="font-style: italic;">Dalle scuderie di Lajatico</text>
+  <text x="600" y="450" font-family="'Manrope', sans-serif" font-size="18" font-weight="300" fill="#666666" text-anchor="middle" style="font-style: italic;">alle collezioni private più esclusive</text>
+</svg>
+
+
+
+
+
+
+
+

@@ -1,0 +1,273 @@
+[
+  {
+    "id": "anima-sonora",
+    "type": "art",
+    "home": true,
+    "title": "L'Anima Sonora",
+    "category": "OPERA UNICA 2024",
+    "status": "Disponibile",
+    "description": "Un tributo alla musica che nasce dal legno e risuona nell'anima. La chitarra prende vita attraverso l'intreccio di ferro battuto e legno pregiato, dove ogni curva racconta una melodia silenziosa. Un pezzo che unisce l'armonia della natura con la passione del metallo forgiato a mano.",
+    "provenance": "Studio dell'Artista, Lajatico",
+    "specifications": [
+      { "label": "Materiale", "value": "Ferro battuto e legno" },
+      { "label": "Dimensioni", "value": "95x35cm" },
+      { "label": "Peso", "value": "8kg" },
+      { "label": "Anno", "value": "2024" }
+    ],
+    "mainImage": "https://i.postimg.cc/Gpz7HJff/Chitarra-01-Principale.png",
+    "videoCover": "https://i.postimg.cc/Gpz7HJff/Chitarra-01-Principale.png",
+    "gallery": [
+      { "url": "https://i.postimg.cc/Gpz7HJff/Chitarra-01-Principale.png", "orientation": "portrait" },
+      { "url": "https://i.postimg.cc/766B7JvN/Chitarra-02.png", "orientation": "portrait" },
+      { "url": "https://i.postimg.cc/633HR4sc/Chitarra-03.png", "orientation": "portrait" },
+      { "url": "https://i.postimg.cc/ZRRf3vkx/Chitarra-04.png", "orientation": "landscape" },
+      { "url": "https://i.postimg.cc/tTMBzRpW/Chitarra-05.png", "orientation": "landscape" }
+    ]
+  },
+  {
+    "id": "riposo-viandante",
+    "type": "art",
+    "home": true,
+    "title": "Il Riposo del Viandante",
+    "category": "COLLEZIONE BOCELLI",
+    "status": "Disponibile",
+    "description": "Una panchina che invita alla contemplazione. Forgiata per accogliere chi cerca un momento di pausa dal mondo. Il legno stagionato incontra il ferro che sembra crescere dalla terra stessa, creando un punto di incontro tra cielo e terra, tra movimento e quiete.",
+    "provenance": "Studio dell'Artista, Lajatico",
+    "specifications": [
+      { "label": "Materiale", "value": "Ferro e legno stagionato" },
+      { "label": "Dimensioni", "value": "180x45x80cm" },
+      { "label": "Peso", "value": "45kg" },
+      { "label": "Anno", "value": "2024" }
+    ],
+    "mainImage": "https://i.postimg.cc/Kcd2GxLC/Panchina-01-Principale.png",
+    "videoCover": "https://i.postimg.cc/Kcd2GxLC/Panchina-01-Principale.png",
+    "gallery": [
+      { "url": "https://i.postimg.cc/Kcd2GxLC/Panchina-01-Principale.png", "orientation": "landscape" },
+      { "url": "https://i.postimg.cc/QNR38h1G/Panchina-02.png", "orientation": "landscape" },
+      { "url": "https://i.postimg.cc/ZY1Sb4py/Panchina-03.png", "orientation": "portrait" },
+      { "url": "https://i.postimg.cc/4NVTnqQ6/Panchina-04.png", "orientation": "landscape" }
+    ]
+  },
+  {
+    "id": "custode-silente",
+    "type": "art",
+    "home": true,
+    "title": "Il Custode Silente",
+    "category": "SERIE LIMITATA",
+    "status": "Disponibile",
+    "description": "Un portavasi che protegge e valorizza. Le radici di ferro abbracciano delicatamente il vaso, creando un dialogo tra la forza del metallo e la fragilità della ceramica. Ogni curva è studiata per esaltare la bellezza di ciò che custodisce, rendendo omaggio alla vita che cresce.",
+    "provenance": "Studio dell'Artista, Lajatico",
+    "specifications": [
+      { "label": "Materiale", "value": "Ferro battuto" },
+      { "label": "Dimensioni", "value": "40x40x60cm" },
+      { "label": "Peso", "value": "12kg" },
+      { "label": "Anno", "value": "2024" }
+    ],
+    "mainImage": "https://i.postimg.cc/bNkjdW90/Portavasi-01-Principale.png",
+    "videoCover": "https://i.postimg.cc/bNkjdW90/Portavasi-01-Principale.png",
+    "gallery": [
+      { "url": "https://i.postimg.cc/bNkjdW90/Portavasi-01-Principale.png", "orientation": "portrait" },
+      { "url": "https://i.postimg.cc/K8bhTf0N/Portavasi-02.png", "orientation": "portrait" }
+    ]
+  },
+  {
+    "id": "campo-battaglia",
+    "type": "art",
+    "home": true,
+    "title": "Il Campo di Battaglia",
+    "category": "OPERA UNICA 2024",
+    "status": "Disponibile",
+    "description": "Strategia e bellezza si fondono in questa scacchiera dove ogni mossa diventa arte. Il legno pregiato incontra il ferro forgiato per creare un campo di gioco che è al tempo stesso oggetto d'uso e scultura. Ogni pezzo è un guerriero silenzioso, ogni partita una danza di intelligenza.",
+    "provenance": "Studio dell'Artista, Lajatico",
+    "specifications": [
+      { "label": "Materiale", "value": "Legno pregiato e ferro" },
+      { "label": "Dimensioni", "value": "50x50x8cm" },
+      { "label": "Peso", "value": "15kg" },
+      { "label": "Anno", "value": "2024" }
+    ],
+    "mainImage": "https://i.postimg.cc/0yv1Sntk/Scacchiera-01-Principale.png",
+    "videoCover": "https://i.postimg.cc/0yv1Sntk/Scacchiera-01-Principale.png",
+    "gallery": [
+      { "url": "https://i.postimg.cc/0yv1Sntk/Scacchiera-01-Principale.png", "orientation": "landscape" },
+      { "url": "https://i.postimg.cc/y8T4yR5B/Scacchiera-02.png", "orientation": "landscape" },
+      { "url": "https://i.postimg.cc/vZvFtnjQ/Scacchiera-03.png", "orientation": "portrait" },
+      { "url": "https://i.postimg.cc/3xZ5FG68/Scacchiera-04.png", "orientation": "landscape" }
+    ]
+  },
+  {
+    "id": "trono-ancestrale",
+    "type": "art",
+    "home": false,
+    "title": "Il Trono Ancestrale",
+    "category": "ACQUISITA ABF",
+    "status": "Disponibile",
+    "description": "Una sedia che porta con sé la memoria degli antichi maestri artigiani. Il ferro si piega e si intreccia per sostenere chi cerca non solo un posto dove sedersi, ma un luogo dove sentirsi re del proprio regno. Ogni saldatura racconta ore di lavoro paziente e passione incondizionata.",
+    "provenance": "Studio dell'Artista, Lajatico",
+    "specifications": [
+      { "label": "Materiale", "value": "Ferro battuto e pelle" },
+      { "label": "Dimensioni", "value": "60x55x95cm" },
+      { "label": "Peso", "value": "25kg" },
+      { "label": "Anno", "value": "2024" }
+    ],
+    "mainImage": "https://i.postimg.cc/zfXmtBZW/Sedia-01-Principale.png",
+    "videoCover": "https://i.postimg.cc/zfXmtBZW/Sedia-01-Principale.png",
+    "gallery": [
+      { "url": "https://i.postimg.cc/zfXmtBZW/Sedia-01-Principale.png", "orientation": "portrait" },
+      { "url": "https://i.postimg.cc/KYvXqzSJ/Sedia-02-png.png", "orientation": "portrait" },
+      { "url": "https://i.postimg.cc/FKPM24NT/Sedia-03.png", "orientation": "portrait" },
+      { "url": "https://i.postimg.cc/Xv7MHJSP/Sedia-04.png", "orientation": "landscape" }
+    ]
+  },
+  {
+    "id": "natura-sospesa",
+    "type": "art",
+    "home": false,
+    "title": "Natura Sospesa",
+    "category": "TRATTATIVA RISERVATA",
+    "status": "Disponibile",
+    "description": "La foresta cristallizzata nel tempo. Questo tavolino in resina epossidica cattura l'essenza del legno antico, sospendendo la bellezza organica in una trasparenza senza tempo. Le venature diventano fiumi di luce, le imperfezioni si trasformano in costellazioni. Un pezzo dove la natura incontra l'eternità.",
+    "provenance": "Studio dell'Artista, Lajatico",
+    "specifications": [
+      { "label": "Materiale", "value": "Legno e resina epossidica" },
+      { "label": "Dimensioni", "value": "120x60x45cm" },
+      { "label": "Peso", "value": "35kg" },
+      { "label": "Anno", "value": "2024" }
+    ],
+    "mainImage": "https://i.postimg.cc/438DrgXg/Tavolino-resina-01-Principale.png",
+    "videoCover": "https://i.postimg.cc/438DrgXg/Tavolino-resina-01-Principale.png",
+    "gallery": [
+      { "url": "https://i.postimg.cc/438DrgXg/Tavolino-resina-01-Principale.png", "orientation": "landscape" },
+      { "url": "https://i.postimg.cc/4dqrxQK9/Tavolino-resina-02.png", "orientation": "landscape" },
+      { "url": "https://i.postimg.cc/xCcwQ4dz/Tavolino-resina-03.png", "orientation": "landscape" },
+      { "url": "https://i.postimg.cc/W3CQ1wDm/Tavolino-resina-04.png", "orientation": "portrait" },
+      { "url": "https://i.postimg.cc/HxRfk9JN/Tavolino-resina-05.png", "orientation": "landscape" }
+    ]
+  },
+  {
+    "id": "equilibrio",
+    "type": "art",
+    "home": false,
+    "title": "L'Equilibrio",
+    "category": "PEZZO UNICO",
+    "status": "Disponibile",
+    "description": "Trasparenze che sfidano la percezione. Un tavolino dove il vetro sembra galleggiare sul ferro, sostenuto da una struttura che celebra l'equilibrio perfetto tra leggerezza e solidità. La luce attraversa il cristallo e danza sulle superfici metalliche, creando un gioco di riflessi che cambia con ogni ora del giorno.",
+    "provenance": "Studio dell'Artista, Lajatico",
+    "specifications": [
+      { "label": "Materiale", "value": "Ferro battuto e vetro temperato" },
+      { "label": "Dimensioni", "value": "100x50x45cm" },
+      { "label": "Peso", "value": "28kg" },
+      { "label": "Anno", "value": "2024" }
+    ],
+    "mainImage": "https://i.postimg.cc/Rht26JK5/Tavolino-vetro-01-Principale.png",
+    "videoCover": "https://i.postimg.cc/Rht26JK5/Tavolino-vetro-01-Principale.png",
+    "gallery": [
+      { "url": "https://i.postimg.cc/Rht26JK5/Tavolino-vetro-01-Principale.png", "orientation": "landscape" },
+      { "url": "https://i.postimg.cc/h4Qk36w3/Tavolino-vetro-02.png", "orientation": "landscape" },
+      { "url": "https://i.postimg.cc/L4gc0w7W/Tavolino-vetro-03.png", "orientation": "landscape" }
+    ]
+  },
+  {
+    "id": "selezione-emiliano",
+    "type": "design",
+    "home": false,
+    "title": "La Selezione Personale di Emiliano",
+    "category": "FERRO E LEGNO",
+    "status": "Ordinabile",
+    "description": "Una collezione curata di pezzi che rappresentano l'essenza della visione di Emiliano. Ferro e legno si incontrano in creazioni che spaziano dall'arredo alla scultura funzionale. Ogni pezzo è realizzato su commissione, garantendo l'unicità e la personalizzazione secondo i desideri del cliente.",
+    "provenance": "Showroom Segnobianco",
+    "specifications": [
+      { "label": "Materiali", "value": "Ferro e legno pregiato" },
+      { "label": "Tipologia", "value": "Su commissione" },
+      { "label": "Stile", "value": "Contemporaneo" },
+      { "label": "Disponibilità", "value": "Ordinabile" }
+    ],
+    "mainImage": "https://i.postimg.cc/yx3vpq8P/Ferro-e-legno-01-Principale.png",
+    "videoCover": "https://i.postimg.cc/yx3vpq8P/Ferro-e-legno-01-Principale.png",
+    "gallery": [
+      { "url": "https://i.postimg.cc/yx3vpq8P/Ferro-e-legno-01-Principale.png", "orientation": "landscape" },
+      { "url": "https://i.postimg.cc/7hJmtvZX/Ferro-e-legno-02.png", "orientation": "landscape" },
+      { "url": "https://i.postimg.cc/1XVJ7x3C/Ferro-e-legno-03.png", "orientation": "landscape" },
+      { "url": "https://i.postimg.cc/NF2pCh0h/Ferro-e-legno-04.png", "orientation": "landscape" },
+      { "url": "https://i.postimg.cc/y6JKCkJF/Ferro-e-legno-05.png", "orientation": "landscape" },
+      { "url": "https://i.postimg.cc/SQwhSk83/Ferro-e-legno-06.png", "orientation": "landscape" }
+    ]
+  },
+  {
+    "id": "console-radice",
+    "type": "design",
+    "home": false,
+    "title": "Console Radice",
+    "category": "PEZZO UNICO",
+    "status": "Disponibile",
+    "description": "Una console da ingresso stretta, dove i ferri sembrano radici che escono dal pavimento per sorreggere un piano in cristallo fumé.",
+    "provenance": "Studio dell'Artista",
+    "specifications": [
+      { "label": "Piano", "value": "Cristallo" },
+      { "label": "Base", "value": "Ferro" },
+      { "label": "Larghezza", "value": "120cm" },
+      { "label": "Peso", "value": "30kg" }
+    ],
+    "mainImage": "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?q=80&w=1000&auto=format&fit=crop",
+    "videoCover": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=800&auto=format&fit=crop",
+    "gallery": [
+      { "url": "https://images.unsplash.com/photo-1582239634217-3721319d677a?q=80&w=800&auto=format&fit=crop", "orientation": "landscape" },
+      { "url": "https://images.unsplash.com/photo-1601625463687-25541fb72f62?q=80&w=800&auto=format&fit=crop", "orientation": "portrait" },
+      { "url": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=800&auto=format&fit=crop", "orientation": "landscape" },
+      { "url": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800&auto=format&fit=crop", "orientation": "portrait" },
+      { "url": "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?q=80&w=800&auto=format&fit=crop", "orientation": "landscape" },
+      { "url": "https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?q=80&w=800&auto=format&fit=crop", "orientation": "portrait" }
+    ]
+  },
+  {
+    "id": "panca-veneta",
+    "type": "design",
+    "home": false,
+    "title": "Panca Veneta",
+    "category": "LIMITED EDITION",
+    "status": "Ordinabile",
+    "description": "Seduta realizzata con legno di recupero dalle briccole veneziane, con supporti laterali forgiati a mano.",
+    "provenance": "Showroom Segnobianco",
+    "specifications": [
+      { "label": "Legno", "value": "Briccola" },
+      { "label": "Supporti", "value": "Acciaio" },
+      { "label": "Lunghezza", "value": "180cm" },
+      { "label": "Peso", "value": "40kg" }
+    ],
+    "mainImage": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1000&auto=format&fit=crop",
+    "videoCover": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=800&auto=format&fit=crop",
+    "gallery": [
+      { "url": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800&auto=format&fit=crop", "orientation": "landscape" },
+      { "url": "https://images.unsplash.com/photo-1601625463687-25541fb72f62?q=80&w=800&auto=format&fit=crop", "orientation": "portrait" },
+      { "url": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=800&auto=format&fit=crop", "orientation": "landscape" },
+      { "url": "https://images.unsplash.com/photo-1582239634217-3721319d677a?q=80&w=800&auto=format&fit=crop", "orientation": "portrait" },
+      { "url": "https://images.unsplash.com/photo-1504198458649-3128b932f49e?q=80&w=800&auto=format&fit=crop", "orientation": "landscape" },
+      { "url": "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=800&auto=format&fit=crop", "orientation": "portrait" }
+    ]
+  },
+  {
+    "id": "libreria-staffa",
+    "type": "design",
+    "home": false,
+    "title": "Libreria Staffa",
+    "category": "SU MISURA",
+    "status": "Progetto",
+    "description": "Struttura modulare per pareti importanti. Le staffe di supporto sono vecchi ferri raddrizzati e risaldati.",
+    "provenance": "Studio dell'Artista",
+    "specifications": [
+      { "label": "Struttura", "value": "Modulare" },
+      { "label": "Mensole", "value": "Noce" },
+      { "label": "Altezza", "value": "Variabile" },
+      { "label": "Peso", "value": "Variabile" }
+    ],
+    "mainImage": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=1000&auto=format&fit=crop",
+    "videoCover": "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=800&auto=format&fit=crop",
+    "gallery": [
+      { "url": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=800&auto=format&fit=crop", "orientation": "landscape" },
+      { "url": "https://images.unsplash.com/photo-1601625463687-25541fb72f62?q=80&w=800&auto=format&fit=crop", "orientation": "portrait" },
+      { "url": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800&auto=format&fit=crop", "orientation": "portrait" },
+      { "url": "https://images.unsplash.com/photo-1582239634217-3721319d677a?q=80&w=800&auto=format&fit=crop", "orientation": "landscape" },
+      { "url": "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?q=80&w=800&auto=format&fit=crop", "orientation": "portrait" },
+      { "url": "https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?q=80&w=800&auto=format&fit=crop", "orientation": "landscape" }
+    ]
+  }
+]
